@@ -10,6 +10,7 @@ import UIKit
 class Bai1: UIViewController {
     var ball = UIView()
     var timer = Timer()
+    var boolRun = true
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,11 +25,23 @@ class Bai1: UIViewController {
         
     }
     func runBall(){
-        ball.frame.origin.x += 2
-        ball.frame.origin.y += 2 * CGFloat((view.frame.maxY - 100) / (view.frame.maxX - 100))
-        
-        if ball.frame.origin.x == view.frame.width - 100{
-            timer.invalidate()
+        if boolRun{
+            if ball.frame.maxX < view.frame.maxX{
+                ball.frame.origin.x += 2
+                ball.frame.origin.y += 2 * CGFloat((view.frame.maxY - 100) / (view.frame.maxX - 100))
+            }
+            else{
+                boolRun = !boolRun
+            }
+        }
+        else{
+            if ball.frame.minX > 0{
+                ball.frame.origin.x -= 2
+                ball.frame.origin.y -= 2 * CGFloat((view.frame.maxY - 100) / (view.frame.maxX - 100))
+            }
+            else{
+                boolRun = !boolRun
+            }
         }
     }
 
